@@ -7,7 +7,7 @@ const dateCreated = Joi.date();
 const qualification = Joi.number().integer().min(1).max(5)
 const image = Joi.string().uri();
 
-const createCategorySchema = Joi.object({
+const createMovieSchema = Joi.object({
     name: name.required(),
     image: image.required(),
     title: title.required(),
@@ -15,17 +15,17 @@ const createCategorySchema = Joi.object({
     qualification: qualification.required(),
 });
 
-const updateCategorySchema = Joi.object({
+const updateMovieSchema = Joi.object({
     name: name,
     image: image,
 });
 
-const getCategorySchema = Joi.object({
+const getMovieSchema = Joi.object({
     id: id.required(),
 });
 
 module.exports = {
-    createCategorySchema,
-    updateCategorySchema,
-    getCategorySchema,
+    createMovieSchema,
+    updateMovieSchema,
+    getMovieSchema,
 };
