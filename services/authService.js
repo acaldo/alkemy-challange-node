@@ -1,4 +1,4 @@
-//const { models } = require('./../libs/sequelize');
+
 const boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -38,11 +38,7 @@ class AuthService {
         };
     }
 
-    async create(data) {
-        const newUser = await service.create(data);
-        delete newUser.dataValues.password;
-        return newUser;
-    }
+
 
     async welcome(email){
         const user = await service.findByEmail(email)
