@@ -14,8 +14,8 @@ const GenderSchema = {
         unique: true,
     },
     image: {
-        type: DataTypes.STRING,
         allowNull: false,
+        type: DataTypes.STRING,
     },
     createdAt: {
         allowNull: false,

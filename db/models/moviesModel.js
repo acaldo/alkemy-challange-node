@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { GENDER_TABLE } = require('./gendersModel');
-const { CHARACTER_TABLE } = require('./gendersModel');
+const { CHARACTER_TABLE } = require('./charactersModel');
 
 
 const MOVIE_TABLE = 'movie';
@@ -57,10 +57,8 @@ const MovieSchema = {
 
 class Movie extends Model {
     static associate(models) {
-        this.hasMany(models.Movie, {
-            as: 'movie',
-            foreignKey: 'movieId',
-        });
+        this.belongsTo(models.Gender, { as: 'gender' });
+        this.belongsTo(models.Character, { as: 'character' });
     }
     static config(sequelize) {
         return {

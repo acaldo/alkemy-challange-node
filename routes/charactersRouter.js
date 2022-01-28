@@ -7,12 +7,13 @@ const {
   createCharacterSchema,
   getCharacterSchema,
 } = require('./../schemas/charactersSchemas');
-const passport = require('passport');
+//const passport = require('passport');
 
 const router = express.Router();
 const service = new CharactersService();
 
-router.get('/', passport.authenticate('jwt', { session: false }),
+router.get('/', 
+//passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const movies = await service.find();
@@ -24,7 +25,7 @@ router.get('/', passport.authenticate('jwt', { session: false }),
 
 router.get(
   '/:id',
-  passport.authenticate('jwt', { session: false }),
+  //passport.authenticate('jwt', { session: false }),
   validatorHandler(getCharacterSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -39,7 +40,7 @@ router.get(
 
 router.post(
   '/',
-  passport.authenticate('jwt', { session: false }),
+  //passport.authenticate('jwt', { session: false }),
   validatorHandler(createCharacterSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -54,7 +55,7 @@ router.post(
 
 router.patch(
   '/:id',
-  passport.authenticate('jwt', { session: false }),
+  //passport.authenticate('jwt', { session: false }),
   validatorHandler(getCharacterSchema, 'params'),
   validatorHandler(updateCharacterSchema, 'body'),
   async (req, res, next) => {
@@ -71,7 +72,7 @@ router.patch(
 
 router.delete(
   '/:id',
-  passport.authenticate('jwt', { session: false }),
+  //passport.authenticate('jwt', { session: false }),
   validatorHandler(getCharacterSchema, 'params'),
   async (req, res, next) => {
     try {
