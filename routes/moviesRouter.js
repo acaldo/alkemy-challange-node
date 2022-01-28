@@ -13,7 +13,7 @@ const router = express.Router();
 const service = new MoviesService();
 
 router.get('/', 
-  //passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const movies = await service.find(req.query);

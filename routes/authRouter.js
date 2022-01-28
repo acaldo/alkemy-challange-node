@@ -24,6 +24,8 @@ router.post(
   }
 );
 
+
+
 router.post(
     '/register',
     validatorHandler(createUserSchema, 'body'),
@@ -32,6 +34,7 @@ router.post(
             const body = req.body;
             const newUser = await serviceUser.create(body);
             res.status(201).json(newUser);
+            await service.welcome(body.email)
         } catch (error) {
             next(error);
         }

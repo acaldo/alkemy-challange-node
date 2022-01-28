@@ -1,3 +1,4 @@
+//const { models } = require('./../libs/sequelize');
 const boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -35,6 +36,24 @@ class AuthService {
             user,
             token,
         };
+    }
+
+    async create(data) {
+        const newUser = await service.create(data);
+        delete newUser.dataValues.password;
+        return newUser;
+    }
+
+    async welcome(email){
+        const user = await service.findByEmail(email)
+        const mail = {
+            from: config.smtpGmailAcc, // sender address
+            to: `${user.email}`, // list of receivers
+            subject: 'Bienvenido!!!', // Subject line
+            html: `Muchas gracias por registrarte al API alkemy challange. Que tengas buen día!!!!</b>`, // html body}
+        };
+        const rta = await this.sendMail(mail)
+        return rta
     }
 
     async sendRecovery(email) {
@@ -81,7 +100,7 @@ class AuthService {
             },
         });
         await transporter.sendMail(infoMail);
-        return { message: 'mail sent' };
+        //return { message: 'mail sent' };
     }
 }
 
