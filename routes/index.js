@@ -11,7 +11,7 @@ function routerApi(app) {
     app.use('',router);
     router.use('/characters', charactersRouter)
     router.use('/movies', moviesRouter);
-    router.use('auth/login', authRouter)
+    router.use('auth/', authRouter)
     router.use('genders', gendersRouter)
 }
 
