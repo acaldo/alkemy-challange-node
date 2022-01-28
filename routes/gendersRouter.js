@@ -6,7 +6,7 @@ const {
   updateGenderSchema,
   createGenderSchema,
   getGenderSchema,
-} = require('./../schemas/genderSchemas');
+} = require('./../schemas/gendersSchemas');
 const passport = require('passport');
 
 const router = express.Router();
@@ -83,3 +83,5 @@ router.delete(
     }
   }
 );
+
+module.exports = router;

@@ -12,7 +12,6 @@ const config = {
     pgEmail: process.env.PG_MAIL,
     pgPassword: process.env.PG_PASSWORD,
     dbUrl: process.env.DATABASE_URL,
-    apiKey: process.env.API_KEY,
     jwtSecret: process.env.JWT_SECRET,
     smtpGmailAcc: process.env.SMTP_GMAIL_ACC,
     smtpGmailPass: process.env.SMTP_GMAIL_PASS,

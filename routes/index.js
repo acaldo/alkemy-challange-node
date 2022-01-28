@@ -8,7 +8,7 @@ const gendersRouter = require('./gendersRouter');
 
 function routerApi(app) {
     const router = express.Router()
-    app.use('',router);
+    app.use('/',router);
     router.use('/characters', charactersRouter)
     router.use('/movies', moviesRouter);
     router.use('auth/', authRouter)

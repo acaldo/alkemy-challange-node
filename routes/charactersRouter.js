@@ -6,7 +6,7 @@ const {
   updateCharacterSchema,
   createCharacterSchema,
   getCharacterSchema,
-} = require('./../schemas/characterSchemas');
+} = require('./../schemas/charactersSchemas');
 const passport = require('passport');
 
 const router = express.Router();
@@ -83,3 +83,5 @@ router.delete(
     }
   }
 );
+
+module.exports = router;
