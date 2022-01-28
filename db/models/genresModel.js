@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const GENDER_TABLE = 'gender';
+const GENRE_TABLE = 'genres';
 
-const GenderSchema = {
+const GenreSchema = {
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -25,21 +25,21 @@ const GenderSchema = {
     },
 };
 
-class Gender extends Model {
+class Genre extends Model {
     static associate(models) {
         this.hasMany(models.Movie, {
             as: 'movie',
-            foreignKey: 'movieId',
+            foreignKey: 'genre',
         });
     }
     static config(sequelize) {
         return {
             sequelize,
-            tableName: GENDER_TABLE,
-            modelName: 'Gender',
+            tableName: GENRE_TABLE,
+            modelName: 'Genre',
             timestamps: false,
         };
     }
 }
 
-module.exports = { GENDER_TABLE, GenderSchema, Gender };
+module.exports = { GENRE_TABLE, GenreSchema, Genre };

@@ -8,14 +8,37 @@ class CharactersService {
         return newCharacter;
     }
 
-    async find() {
-        const rta = await models.Character.findAll();
+    async find(query) {
+        const options = {
+            attributes: ['name','image'],
+            include: [],
+            where: {}
+        }
+
+        const { name, age, movieId } = query
+        if (name) {
+            options.where.name = name
+            options.include = 'movie'
+            options.attributes = ['id', 'name', 'image', 'age', 'weight', 'history', 'movieId']
+        }
+        if (age) {
+            options.where.age = age
+            options.include = 'movie'
+            options.attributes = ['id', 'name', 'image', 'age', 'weight', 'history', 'movieId']
+        }
+        if (movieId) {
+            options.where.movieId = movieId
+            options.include = 'movie'
+            options.attributes = ['id', 'name', 'image', 'age', 'weight', 'history', 'movieId']
+        }
+
+        const rta = await models.Character.findAll(options);
         return rta;
     }
 
     async findOne(id) {
         const character = await models.Character.findByPk(id, {
-            include: ['product'],
+            include: ['movie'],
         });
         if (!character) {
             throw boom.notFound('character not found');

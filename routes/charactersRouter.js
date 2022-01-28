@@ -6,17 +6,19 @@ const {
   updateCharacterSchema,
   createCharacterSchema,
   getCharacterSchema,
+  queryProductSchema,
 } = require('./../schemas/charactersSchemas');
-//const passport = require('passport');
+const passport = require('passport');
 
 const router = express.Router();
 const service = new CharactersService();
 
 router.get('/', 
-//passport.authenticate('jwt', { session: false }),
+passport.authenticate('jwt', { session: false }),
+validatorHandler(queryProductSchema, 'query'),
   async (req, res, next) => {
     try {
-      const movies = await service.find();
+      const movies = await service.find(req.query);
       res.json(movies)
     } catch (error) {
       next(error);

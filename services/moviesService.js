@@ -8,14 +8,35 @@ class MoviesService {
         return newMovie;
     }
 
-    async find() {
-        const rta = await models.Movie.findAll();
+    async find(query) {
+        const options = {
+            attributes : ['title','image','creation'],
+            include: [],
+            where: {}
+        }
+
+        const {name,genre,order} = query
+        if (name) {
+            options.where.title = name
+            options.include = 'character','genre'
+            options.attributes = ['id','title','image','creation','createdAt']
+        }
+        if (genre) {
+            options.where.genre = genre
+            options.include = 'character','genre'
+            options.attributes = ['id','title','image','creation','createdAt']
+        }
+        if (order){
+            options.order = ['title', order]
+        }
+
+        const rta = await models.Movie.findAll(options);
         return rta;
     }
 
     async findOne(id) {
         const movie = await models.Movie.findByPk(id, {
-            include: ['product'],
+            include: ['character', 'genre'],
         });
         if (!movie) {
             throw boom.notFound('movie not found');

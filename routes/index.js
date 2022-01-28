@@ -3,7 +3,7 @@ const express = require('express')
 const authRouter = require('./authRouter');
 const charactersRouter = require('./charactersRouter');
 const moviesRouter = require('./moviesRouter');
-const gendersRouter = require('./gendersRouter');
+const gendersRouter = require('./genresRouter');
 
 
 function routerApi(app) {
@@ -11,8 +11,8 @@ function routerApi(app) {
     app.use('/',router);
     router.use('/characters', charactersRouter)
     router.use('/movies', moviesRouter);
-    router.use('auth/', authRouter)
-    router.use('genders', gendersRouter)
+    router.use('/auth', authRouter)
+    router.use('/genders', gendersRouter)
 }
 
 module.exports = routerApi

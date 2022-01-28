@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { MOVIE_TABLE } = require('./moviesModel');
 
 
 const CHARACTER_TABLE = 'character';
@@ -10,14 +11,14 @@ const CharacterSchema = {
         primaryKey: true,
         type: DataTypes.INTEGER,
     },
-    image: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     name: {
         allowNull: false,
         type: DataTypes.STRING,
         unique: true,
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     age: {
         allowNull: false,
@@ -37,14 +38,23 @@ const CharacterSchema = {
         field: 'created_at',
         defaultValue: Sequelize.NOW,
     },
+    movieId: {
+        field: 'movie_id',
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+            model: MOVIE_TABLE,
+            key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+    },
 };
+
 
 class Character extends Model {
     static associate(models) {
-        this.hasMany(models.Movie, {
-            as: 'movie',
-            foreignKey: 'movieId',
-        });
+        this.belongsTo(models.Movie, { as: 'movie' });
     }
     static config(sequelize) {
         return {

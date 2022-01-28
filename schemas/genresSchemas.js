@@ -4,23 +4,23 @@ const id = Joi.number().integer();
 const name = Joi.string().min(3).max(15);
 const image = Joi.string().uri();
 
-const createGenderSchema = Joi.object({
+const createGenreSchema = Joi.object({
     name: name.required(),
     image: image.required(),
 
 });
 
-const updateGenderSchema = Joi.object({
+const updateGenreSchema = Joi.object({
     name: name,
     image: image,
 });
 
-const getGenderSchema = Joi.object({
+const getGenreSchema = Joi.object({
     id: id.required(),
 });
 
 module.exports = {
-    createGenderSchema,
-    updateGenderSchema,
-    getGenderSchema,
+    createGenreSchema,
+    updateGenreSchema,
+    getGenreSchema,
 };

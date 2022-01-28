@@ -1,18 +1,19 @@
 const express = require('express');
 
-const GendersService = require('./../services/gendersService');
-const validatorHandler = require('./../middleware/validatorHandler');
+const GenresService = require('./../services/genresService');
+const validatorHandler = require('../middleware/validatorHandler');
 const {
-  updateGenderSchema,
-  createGenderSchema,
-  getGenderSchema,
-} = require('./../schemas/gendersSchemas');
+  updateGenreSchema,
+  createGenreSchema,
+  getGenreSchema,
+} = require('./../schemas/genresSchemas');
 const passport = require('passport');
 
 const router = express.Router();
-const service = new GendersService();
+const service = new GenresService();
 
-router.get('/', passport.authenticate('jwt', { session: false }),
+router.get('/', 
+  //passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const movies = await service.find();
@@ -24,8 +25,8 @@ router.get('/', passport.authenticate('jwt', { session: false }),
 
 router.get(
   '/:id',
-  passport.authenticate('jwt', { session: false }),
-  validatorHandler(getGenderSchema, 'params'),
+  //passport.authenticate('jwt', { session: false }),
+  validatorHandler(getGenreSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -39,8 +40,8 @@ router.get(
 
 router.post(
   '/',
-  passport.authenticate('jwt', { session: false }),
-  validatorHandler(createGenderSchema, 'body'),
+  //passport.authenticate('jwt', { session: false }),
+  validatorHandler(createGenreSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
@@ -55,8 +56,8 @@ router.post(
 router.patch(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(getGenderSchema, 'params'),
-  validatorHandler(updateGenderSchema, 'body'),
+  validatorHandler(getGenreSchema, 'params'),
+  validatorHandler(updateGenreSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -72,7 +73,7 @@ router.patch(
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  validatorHandler(getGenderSchema, 'params'),
+  validatorHandler(getGenreSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

@@ -12,10 +12,11 @@ const passport = require('passport');
 const router = express.Router();
 const service = new MoviesService();
 
-router.get('/', passport.authenticate('jwt', { session: false }),
+router.get('/', 
+  //passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
-      const movies = await service.find();
+      const movies = await service.find(req.query);
       res.json(movies)
     } catch (error) {
       next(error);
@@ -39,7 +40,7 @@ router.get(
 
 router.post(
   '/',
-  passport.authenticate('jwt', { session: false }),
+  //passport.authenticate('jwt', { session: false }),
   validatorHandler(createMovieSchema, 'body'),
   async (req, res, next) => {
     try {
