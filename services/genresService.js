@@ -15,7 +15,7 @@ class GenresService {
 
     async findOne(id) {
         const genres = await models.Genre.findByPk(id, {
-            include: ['genreMovie']
+            association: ['genreMovie']
         });
         if (!genres) {
             throw boom.notFound('genres not found');
