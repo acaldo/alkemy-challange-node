@@ -8,9 +8,16 @@ class CharactersService {
         return newCharacter;
     }
 
+    async findAll() {
+        const rta = await models.Character.findAll({
+            include: ['movie']
+        });
+        return rta;
+    }
+
     async find(query) {
         const options = {
-            attributes: ['name','image'],
+            attributes: ['name', 'image'],
             include: [],
             where: {}
         }

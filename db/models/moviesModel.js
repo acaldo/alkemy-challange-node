@@ -1,7 +1,4 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { GENRE_TABLE } = require('./genresModel');
-
-
 
 const MOVIE_TABLE = 'movie';
 
@@ -23,7 +20,7 @@ const MovieSchema = {
     },
     creation: {
         allowNull: false,
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
     },
     qualification: {
         allowNull: false,
@@ -35,26 +32,21 @@ const MovieSchema = {
         field: 'created_at',
         defaultValue: Sequelize.NOW,
     },
-    genreId: {
-        allowNull: false,
-        type: DataTypes.INTEGER,
-        references: {
-            model: GENRE_TABLE,
-            key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-    },
 };
 
 class Movie extends Model {
     static associate(models) {
-        this.belongsTo(models.Genre, { as: 'genre' });
         this.hasMany(models.Character, {
             as: 'character',
             foreignKey: 'movieId',
         });
-        
+        this.belongsToMany(models.Genre, {
+            as: 'genreMovie',
+            through: models.MovieGenre,
+            foreignKey: 'movieId',
+            otherKey: 'genreId'
+        })
+
     }
     static config(sequelize) {
         return {

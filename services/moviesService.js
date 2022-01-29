@@ -8,30 +8,35 @@ class MoviesService {
         return newMovie;
     }
 
-    async findAll(){
+    async addGenre(data) {
+        const newMovieGenre = await models.MovieGenre.create(data);
+        return newMovieGenre;
+    }
+
+    async findAll() {
         const rta = await models.Movie.findAll({
-            include: ['character','genre']
+            include: ['character', 'genreMovie']
         });
         return rta;
     }
 
     async find(query) {
         const options = {
-            attributes : ['title','image','creation',],
+            attributes: ['title', 'image', 'creation',],
             include: [],
             where: {}
         }
 
-        const {name,genre} = query
+        const { name, genre } = query
         if (name) {
             options.where.title = name
-            options.include = ['character','genre']
-            options.attributes = ['id','title','image','creation','createdAt']
+            options.include = ['character', 'genre', 'genreMovie']
+            options.attributes = ['id', 'title', 'image', 'creation', 'createdAt']
         }
         if (genre) {
             options.where.genreId = genre
-            options.include = ['character','genre']
-            options.attributes = ['id','title','image','creation','createdAt']
+            options.include = ['character', 'genre', 'genreMovie']
+            options.attributes = ['id', 'title', 'image', 'creation', 'createdAt']
         }
 
 
@@ -41,7 +46,7 @@ class MoviesService {
 
     async findOne(id) {
         const movie = await models.Movie.findByPk(id, {
-            include: ['character', 'genre'],
+            include: ['genreMovie']
         });
         if (!movie) {
             throw boom.notFound('movie not found');
