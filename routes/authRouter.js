@@ -1,5 +1,4 @@
 const express = require('express'); //usamos express
-const passport = require('passport');
 const AuthService = require('./../services/authService');
 const UserService = require('./../services/userService');
 const service = new AuthService();
@@ -13,7 +12,7 @@ const {
 
 router.post(
     '/login',
-    passport.authenticate('local', { session: false }),
+    validatorHandler(createUserSchema, 'body'),
     async (req, res, next) => {
         try {
             const user = req.user;
