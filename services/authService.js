@@ -28,8 +28,7 @@ class AuthService {
         };
 
         const payload = {
-            sub: user.id,
-            role: user.role,
+            sub: user.id
         };
         const token = jwt.sign(payload, config.jwtSecret, jwtConfig);
         return {
@@ -40,7 +39,7 @@ class AuthService {
 
 
 
-    async welcome(email){
+    async welcome(email) {
         const user = await service.findByEmail(email)
         const mail = {
             from: config.smtpGmailAcc, // sender address
