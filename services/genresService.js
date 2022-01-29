@@ -9,7 +9,9 @@ class GenresService {
     }
 
     async find() {
-        const rta = await models.Genre.findAll();
+        const rta = await models.Genre.findAll({
+            include: ['genreMovie']
+        });
         return rta;
     }
 
