@@ -32,6 +32,10 @@ const options = {
 app.use(cors(options));
  */
 
+app.get('/', (req, res) => {
+  res.send('Bienvenidos a la API Alkemy Challange Node');
+});
+
 routerApi(app);
 
 app.use(logErrors);
