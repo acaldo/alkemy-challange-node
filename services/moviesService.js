@@ -8,27 +8,32 @@ class MoviesService {
         return newMovie;
     }
 
+    async findAll(){
+        const rta = await models.Movie.findAll({
+            include: ['character','genre']
+        });
+        return rta;
+    }
+
     async find(query) {
         const options = {
-            attributes : ['title','image','creation'],
+            attributes : ['title','image','creation',],
             include: [],
             where: {}
         }
 
-        const {name,genre,order} = query
+        const {name,genre} = query
         if (name) {
             options.where.title = name
-            options.include = 'character','genre'
+            options.include = ['character','genre']
             options.attributes = ['id','title','image','creation','createdAt']
         }
         if (genre) {
-            options.where.genre = genre
-            options.include = 'character','genre'
+            options.where.genreId = genre
+            options.include = ['character','genre']
             options.attributes = ['id','title','image','creation','createdAt']
         }
-        if (order){
-            options.order = ['title', order]
-        }
+
 
         const rta = await models.Movie.findAll(options);
         return rta;

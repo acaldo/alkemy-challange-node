@@ -4,17 +4,17 @@ class GenresService {
     constructor() { }
 
     async create(data) {
-        const newGenres = await models.Genres.create(data);
+        const newGenres = await models.Genre.create(data);
         return newGenres;
     }
 
     async find() {
-        const rta = await models.Genres.findAll();
+        const rta = await models.Genre.findAll();
         return rta;
     }
 
     async findOne(id) {
-        const genres = await models.Genres.findByPk(id, {
+        const genres = await models.Genre.findByPk(id, {
             include: ['product'],
         });
         if (!genres) {

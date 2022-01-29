@@ -3,11 +3,13 @@ const routerApi = require('./routes'); //usamos express
 const passport = require('passport');
 const cors = require('cors'); //usamo cors
 const {
-    logErrors,
-    errorHandler,
-    boomErrorHandler,
-    ormErrorHandler,
+  logErrors,
+  errorHandler,
+  boomErrorHandler,
+  ormErrorHandler,
 } = require('./middleware/errorHandler');
+const swaggerUI = require('swagger-ui-express');
+const swagger = require('./swagger.def');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -38,6 +40,7 @@ app.use(logErrors);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swagger))
 
 app.listen(port, () => {
 });

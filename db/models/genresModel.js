@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const GENRE_TABLE = 'genres';
+const GENRE_TABLE = 'genre';
 
 const GenreSchema = {
     id: {
@@ -29,7 +29,7 @@ class Genre extends Model {
     static associate(models) {
         this.hasMany(models.Movie, {
             as: 'movie',
-            foreignKey: 'genre',
+            foreignKey: 'genreId',
         });
     }
     static config(sequelize) {

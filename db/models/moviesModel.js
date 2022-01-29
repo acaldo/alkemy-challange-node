@@ -25,14 +25,17 @@ const MovieSchema = {
         allowNull: false,
         type: DataTypes.DATE,
     },
+    qualification: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+    },
     createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
         field: 'created_at',
         defaultValue: Sequelize.NOW,
     },
-    genre: {
-        field: 'genre_id',
+    genreId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
@@ -46,7 +49,7 @@ const MovieSchema = {
 
 class Movie extends Model {
     static associate(models) {
-        this.belongsTo(models.Genre, { as: 'genres' });
+        this.belongsTo(models.Genre, { as: 'genre' });
         this.hasMany(models.Character, {
             as: 'character',
             foreignKey: 'movieId',
