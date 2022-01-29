@@ -10,7 +10,12 @@ class GenresService {
 
     async find() {
         const rta = await models.Genre.findAll({
-            include: ['genreMovie']
+            include: [
+                {
+                    association: 'movie',
+                    include: ['genreMovie']
+                }
+            ]
         });
         return rta;
     }

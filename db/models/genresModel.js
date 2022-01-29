@@ -29,11 +29,11 @@ const GenreSchema = {
 
 class Genre extends Model {
     static associate(models) {
-        this.belongsToMany(models.Genre, {
+        this.belongsToMany(models.Movie, {
             as: 'genreMovie',
             through: models.MovieGenre,
-            foreignKey: 'movieId',
-            otherKey: 'genreId'
+            foreignKey: 'genreId',
+            otherKey: 'movieId'
         })
     }
     static config(sequelize) {
