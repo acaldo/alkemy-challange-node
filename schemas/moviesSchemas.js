@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const title = Joi.string().min(3).max(15);
+const title = Joi.string().min(3).max(150);
 const creation = Joi.date();
 const qualification = Joi.number().integer().min(1).max(5)
 const image = Joi.string().uri();
