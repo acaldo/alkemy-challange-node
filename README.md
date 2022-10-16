@@ -23,7 +23,7 @@
 
 ## Instalacion
 
-Se requiere [Node.js](https://nodejs.org/) v16+ para su funcionamiento.
+Se requiere [Node.js](https://nodejs.org/){target="_blank" rel="noopener"} v16+ para su funcionamiento.
 
 Instalar dependencias
 
